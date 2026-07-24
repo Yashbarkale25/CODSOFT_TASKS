@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import hero from "../assets/hero.png";
+import hero from "../assets/Hero.png";
 
 function Hero() {
   const navigate = useNavigate();
