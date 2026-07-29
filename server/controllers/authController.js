@@ -4,6 +4,11 @@ const User = require("../models/User");
 const otpGenerator = require("otp-generator");
 const sendEmail = require("../utils/sendEmail");
 
+const logout = async (req, res) => {
+  return res.status(200).json({
+    message: "Logout Successful",
+  });
+};
 // ===============================
 // Register
 // ===============================
@@ -114,36 +119,16 @@ const login = async (req, res) => {
     });
   }
 };
-
-// ===============================
-// Logout
-// ===============================
-const logout = async (req, res) => {
-  try {
-    return res
-      .cookie("token", "", {
-        maxAge: 0,
-        httpOnly: true,
-      })
-      .status(200)
-      .json({
-        message: "Logout successful",
-      });
-  } catch (error) {
-    console.log(error);
-
-    return res.status(500).json({
-      message: "Server Error",
-    });
-  }
-};
-
 // ===============================
 // Forgot Password (Send OTP)
 // ===============================
 const forgotPassword = async (req, res) => {
   try {
+    console.log("🚀 Forgot Password API Called");
+
     const { email } = req.body;
+
+    console.log("📧 Email:", email);
 
     const user = await User.findOne({ email });
 
@@ -160,17 +145,21 @@ const forgotPassword = async (req, res) => {
       digits: true,
     });
 
+    console.log("Generated OTP:", otp);
+
     user.resetOTP = otp;
     user.resetOTPExpire = Date.now() + 10 * 60 * 1000;
 
     await user.save();
+
+    console.log("OTP Saved");
 
     await sendEmail(
       user.email,
       "Password Reset OTP",
       `Hi ${user.fullName},
 
-Your OTP for password reset is:
+Your OTP is:
 
 ${otp}
 
@@ -179,18 +168,21 @@ This OTP is valid for 10 minutes.
 Job Portal Team`
     );
 
+    console.log("Email Sent");
+
     return res.status(200).json({
-      message: "OTP sent successfully",
+      message: "OTP Sent Successfully",
     });
+
   } catch (error) {
+    console.log("Forgot Password Error");
     console.log(error);
 
     return res.status(500).json({
-      message: "Server Error",
+      message: error.message,
     });
   }
 };
-
 // ===============================
 // Verify OTP
 // ===============================
