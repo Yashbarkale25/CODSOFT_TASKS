@@ -2,18 +2,21 @@ const nodemailer = require("nodemailer");
 
 const transporter = nodemailer.createTransport({
   host: "smtp.gmail.com",
-  port: 465,
-  secure: true,
+  port: 587,
+  secure: false,
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
-  connectionTimeout: 10000,
-  greetingTimeout: 10000,
-  socketTimeout: 10000,
+  tls: {
+    rejectUnauthorized: false,
+  },
+  connectionTimeout: 20000,
+  greetingTimeout: 20000,
+  socketTimeout: 20000,
 });
 
-// SMTP Verify
+// Verify SMTP
 transporter.verify((error, success) => {
   if (error) {
     console.log("❌ SMTP Verify Error:");
@@ -30,7 +33,7 @@ const sendEmail = async (to, subject, text) => {
     console.log("To:", to);
 
     const info = await transporter.sendMail({
-      from: `"Job Portal" <${process.env.EMAIL_USER}>`,
+      from: process.env.EMAIL_USER,
       to,
       subject,
       text,
@@ -46,10 +49,9 @@ const sendEmail = async (to, subject, text) => {
     return info;
   } catch (error) {
     console.log("=================================");
-    console.log("❌ Email Sending Error");
+    console.log("❌ Email Error");
     console.log(error);
     console.log("=================================");
-
     throw error;
   }
 };
