@@ -127,10 +127,14 @@ const [currentLogo, setCurrentLogo] = useState("");
     <p className="font-semibold mb-2">Current Logo</p>
 
     <img
-      src={`http://localhost:5000${currentLogo}`}
-      alt="Company Logo"
-      className="w-28 h-28 rounded-full border object-cover"
-    />
+  src={
+    job.company?.logo?.startsWith("http")
+      ? job.company.logo
+      : "https://via.placeholder.com/70"
+  }
+  alt="Company Logo"
+  className="w-16 h-16 rounded-xl border object-cover"
+/>
   </div>
 )}
         <input

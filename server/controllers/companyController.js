@@ -32,7 +32,7 @@ const createCompany = async (req, res) => {
       description,
       website,
       location,
-      logo: req.file ? `/uploads/${req.file.filename}` : "",
+     logo: req.file ? req.file.path : "",
       createdBy,
     });
 
@@ -134,8 +134,8 @@ const updateCompany = async (req, res) => {
       req.body.location || company.location;
 
     if (req.file) {
-      company.logo = `/uploads/${req.file.filename}`;
-    }
+  company.logo = req.file.path;
+}
 
     await company.save();
 

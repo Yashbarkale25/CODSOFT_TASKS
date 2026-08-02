@@ -85,15 +85,14 @@ function FeaturedJobs() {
                   <div className="flex items-center gap-4">
 
                     <img
-                      src={
-                        job.company?.logo
-                          ? `http://localhost:5000${job.company.logo}`
-                          : "https://via.placeholder.com/70"
-                      }
-                      alt={job.company?.name}
-                      className="w-16 h-16 rounded-xl object-cover border"
-                    />
-
+  src={
+    job.company?.logo?.startsWith("http")
+      ? job.company.logo
+      : "https://via.placeholder.com/70"
+  }
+  alt="Company Logo"
+  className="w-16 h-16 rounded-xl border object-cover"
+/>
                     <div>
                       <h3 className="text-xl font-bold text-gray-800">
                         {job.title}

@@ -48,10 +48,10 @@ function TopCompanies() {
               >
                 <img
                   src={
-                    company.logo
-                      ? `http://localhost:5000${company.logo}`
-                      : "https://via.placeholder.com/80"
-                  }
+  company.logo
+    ? company.logo
+    : "https://via.placeholder.com/80"
+}
                   alt={company.name}
                   className="w-20 h-20 object-cover rounded-xl border"
                 />

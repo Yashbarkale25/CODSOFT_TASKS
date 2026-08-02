@@ -62,15 +62,14 @@ function Company() {
               <div className="flex justify-center">
 
                 <img
-                  src={
-                    company.logo
-                      ? `http://localhost:5000${company.logo}`
-                      : "https://placehold.co/120x120?text=Logo"
-                  }
-                  alt=""
-                  className="w-28 h-28 rounded-full border object-cover"
-                />
-
+  src={
+    company.logo?.startsWith("http")
+      ? company.logo
+      : "https://via.placeholder.com/80"
+  }
+  alt={company.name}
+  className="w-16 h-16 rounded-xl border object-cover"
+/>
               </div>
 
               <h2 className="text-2xl font-bold text-center mt-5">

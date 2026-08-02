@@ -31,7 +31,7 @@ const applyJob = async (req, res) => {
     const application = await Application.create({
       job,
       applicant,
-      resume: req.file ? `/uploads/${req.file.filename}` : "",
+      resume: req.file ? req.file.path : "",
       status: "Pending",
     });
     const applicantData = await User.findById(applicant);

@@ -101,16 +101,15 @@ function MyJobs() {
             <h2 className="text-2xl font-bold">{job.title}</h2>
             <div className="flex items-center gap-4 mb-4">
 
-  <img
-    src={
-      job.company?.logo
-        ? `http://localhost:5000${job.company.logo}`
-        : "https://placehold.co/70x70?text=Logo"
-    }
-    alt=""
-    className="w-16 h-16 rounded-xl border object-cover"
-  />
-
+ <img
+  src={
+    job.company?.logo?.startsWith("http")
+      ? job.company.logo
+      : "https://via.placeholder.com/70"
+  }
+  alt="Company Logo"
+  className="w-16 h-16 rounded-xl border object-cover"
+/>
   <div>
 
     

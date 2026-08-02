@@ -14,9 +14,16 @@ function MyApplications() {
     try {
       const res = await API.get("/applications");
 
+      console.log("USER:", user);
+      console.log("APPLICATIONS:", res.data);
+
       const myApplications = res.data.filter(
-        (application) => application.applicant._id === user._id
+        (application) =>
+          application.applicant?._id === user?._id &&
+          application.job !== null
       );
+
+      console.log("My Applications:", myApplications);
 
       setApplications(myApplications);
     } catch (error) {
@@ -40,20 +47,34 @@ function MyApplications() {
             className="bg-white p-6 rounded-xl shadow-lg mb-5"
           >
             <h2 className="text-2xl font-bold">
-              {application.job.title}
+              {application.job?.title}
             </h2>
 
             <p className="text-gray-600">
-              {application.job.company?.name}
+              {application.job?.company?.name}
             </p>
 
             <p className="mt-2">
-              📍 {application.job.location}
+              📍 {application.job?.location}
             </p>
 
             <p>
-              💰 ₹ {application.job.salary}
+              💰 ₹ {Number(application.job?.salary).toLocaleString()}
             </p>
+
+            <div className="mt-4">
+              <span
+                className={`px-4 py-2 rounded-full text-white ${
+                  application.status === "Accepted"
+                    ? "bg-green-600"
+                    : application.status === "Rejected"
+                    ? "bg-red-600"
+                    : "bg-yellow-500"
+                }`}
+              >
+                {application.status}
+              </span>
+            </div>
           </div>
         ))
       )}

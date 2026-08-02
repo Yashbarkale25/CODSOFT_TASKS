@@ -212,24 +212,18 @@ function Dashboard() {
 
                     <td className="p-3">
 
-                      {app.resume ? (
-
-                        <a
-                          href={`http://localhost:5000${app.resume}`}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="text-blue-600 font-semibold hover:underline"
-                        >
-                          View Resume
-                        </a>
-
-                      ) : (
-
-                        "No Resume"
-
-                      )}
-
-                    </td>
+                     {app.resume ? (
+  <a
+    href={app.resume}
+    target="_blank"
+    rel="noreferrer"
+    className="text-blue-600 font-semibold hover:underline"
+  >
+    View Resume
+  </a>
+) : (
+  "No Resume"
+)}          </td>
 
                   </tr>
 

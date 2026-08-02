@@ -149,19 +149,19 @@ const uploadResume = async () => {
                 Resume
               </h2>
 
-                        {user.resume ? (
-              <a
-                href={`http://localhost:5000${user.resume}`}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-3 text-red-600 mb-4"
-              >
-                <FaFilePdf size={28} />
-                View Resume
-              </a>
-            ) : (
-              <p className="mb-4">No Resume Uploaded</p>
-            )}
+                     {user.resume ? (
+  <a
+    href={user.resume}
+    target="_blank"
+    rel="noreferrer"
+    className="flex items-center gap-3 text-red-600 mb-4"
+  >
+    <FaFilePdf size={28} />
+    View Resume
+  </a>
+) : (
+  <p className="mb-4">No Resume Uploaded</p>
+)}
 
             <input
               type="file"

@@ -125,11 +125,13 @@ const updateJob = async (req, res) => {
 };
 
 // Delete Job
+// Delete Job
 const deleteJob = async (req, res) => {
   try {
     const { id } = req.params;
 
-    const job = await Job.findByIdAndDelete(id);
+    // Check Job Exists
+    const job = await Job.findById(id);
 
     if (!job) {
       return res.status(404).json({
@@ -137,11 +139,21 @@ const deleteJob = async (req, res) => {
       });
     }
 
-    return res.status(200).json({
-      message: "Job deleted successfully",
+    // Delete all applications of this job
+    await Application.deleteMany({
+      job: id,
     });
+
+    // Delete Job
+    await Job.findByIdAndDelete(id);
+
+    return res.status(200).json({
+      message: "Job and all related applications deleted successfully",
+    });
+
   } catch (error) {
     console.log(error);
+
     return res.status(500).json({
       message: "Server Error",
     });

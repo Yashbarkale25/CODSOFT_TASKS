@@ -78,16 +78,19 @@ function ViewApplicants() {
                   </td>
 
                   <td className="p-4">
-                    <a
-                      href={`http://localhost:5000${app.resume}`}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-blue-600"
-                    >
-                      View Resume
-                    </a>
-                  </td>
-
+  {app.resume ? (
+    <a
+      href={app.resume}
+      target="_blank"
+      rel="noreferrer"
+      className="text-blue-600 hover:underline"
+    >
+      View Resume
+    </a>
+  ) : (
+    "No Resume"
+  )}
+</td>
                   <td className="p-4">
                     {app.status}
                   </td>

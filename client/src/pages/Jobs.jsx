@@ -209,15 +209,14 @@ const totalPages = Math.ceil(filteredJobs.length / jobsPerPage);
                         <div className="flex gap-4">
 
                           <img
-                            src={
-                              job.company?.logo
-                                ? `http://localhost:5000${job.company.logo}`
-                                : "https://via.placeholder.com/70"
-                            }
-                            alt=""
-                            className="w-16 h-16 rounded-xl object-cover border"
-                          />
-
+  src={
+    job.company?.logo?.startsWith("http")
+      ? job.company.logo
+      : "https://via.placeholder.com/70"
+  }
+  alt="Company Logo"
+  className="w-16 h-16 rounded-xl border object-cover"
+/>
                           <div>
 
                             <h2 className="text-xl font-bold">
